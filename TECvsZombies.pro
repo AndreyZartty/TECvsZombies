@@ -17,12 +17,18 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     estudiante.cpp \
+    list.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    nodeg.cpp \
+    poblacion.cpp
 
 HEADERS += \
     estudiante.h \
-    mainwindow.h
+    list.h \
+    mainwindow.h \
+    nodeg.h \
+    poblacion.h
 
 FORMS += \
     mainwindow.ui
