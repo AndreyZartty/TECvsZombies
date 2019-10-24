@@ -13,38 +13,90 @@ using namespace std;
 
 
 /**
- * Representa un Gladiador
+ * Representa un Estudiante
  *
- * @since 30/04/19
+ * @since 24/10/19
  */
 
 
 /**
- * Constructor de Gladiador.
+ * Constructor de Estudiante.
  * @param generacion
  */
 Estudiante::Estudiante(int generacion)
 {
     if (generacion == 1){
 
-        //srand (time(NULL));
-        /*int random = 15 + rand() % (61 - 15);
-        setEdad(random);
-        random = 1 + rand() % (5 - 1);
+        setTipo();
+        if(getTipo() == 1){ /// Ogro
 
-        setInteligencia(random);
-        random = 1 + rand() % (5 - 1);
+            int random = 5 + rand() % (5-1); /// 5 = Resistentes
+            setResistenciaArqueros(random);
 
-        setCondicionFisica(random);
-        random = 1 + rand() % (5 - 1);
+            random = 1 + rand() % (5-1); /// 1 = Debiles
+            setResistenciaMagos(random);
 
-        setFuerzaSuperior(random);
-        random = 1 + rand() % (5 - 1);
+            random = 1 + rand() % (5-1); /// 1 = Debiles
+            setResistenciaArtilleros(random);
 
-        setFuerzaInferior(random);
-        setResistencia();
-        setExpectativaVida(getResistencia()/10);
-        setProbabilidadSupervivencia(getResistencia()-4);*/
+            random = 1 + rand() % (5-1); /// 1 = Debiles
+            setResistenciaLanzaFuegos(random);
+
+            random = 1 + rand() % (5-1); /// 1 = Lentos
+            setVelocidad(random);
+        }
+        else if(getTipo() == 2){ /// Elfo
+
+            int random = 5 + rand() % (5-1); /// 5 = Resistentes
+            setResistenciaArqueros(random);
+
+            random = 5 + rand() % (5-1); /// 5 = Resistentes
+            setResistenciaMagos(random);
+
+            random = 1 + rand() % (5-1); /// 1 = Debiles
+            setResistenciaArtilleros(random);
+
+            random = 1 + rand() % (5-1); /// 1 = Debiles
+            setResistenciaLanzaFuegos(random);
+
+            random = 3 + rand() % (5-1); /// 3 = Velocidad media
+            setVelocidad(random);
+        }
+        else if(getTipo() == 3){ /// Harpia
+
+            int random = 3 + rand() % (5-1); /// 3 = Resistencia media(Solo son atacados por Artilleros y lanzafuego)
+            setResistenciaArqueros(random);
+
+            random = 3 + rand() % (5-1); /// 3 = Resistencia media(Solo son atacados por Artilleros y lanzafuego)
+            setResistenciaMagos(random);
+
+            random = 3 + rand() % (5-1); /// 3 = Resistencia media(Solo son atacados por Artilleros y lanzafuego)
+            setResistenciaArtilleros(random);
+
+            random = 3 + rand() % (5-1); /// 3 = Resistencia media(Solo son atacados por Artilleros y lanzafuego)
+            setResistenciaLanzaFuegos(random);
+
+            random = 3 + rand() % (5-1); /// 3 = Velocidad media
+            setVelocidad(random);
+        }
+        else if(getTipo() == 4){ /// Mercenario
+
+            int random = 5 + rand() % (5-1); /// 5 = Resistentes
+            setResistenciaArqueros(random);
+
+            random = 5 + rand() % (5-1); /// 5 = Resistentes
+            setResistenciaMagos(random);
+
+            random = 5 + rand() % (5-1); /// 5 = Resistentes
+            setResistenciaArtilleros(random);
+
+            random = 1 + rand() % (5-1); /// 1 = Debiles
+            setResistenciaLanzaFuegos(random);
+
+            random = 5 + rand() % (5-1); /// 5 = Muy Rapido
+            setVelocidad(random);
+        }
+        setVida(generacion);
     }
     else {
         cout << "Introduzca los padres si no es la primera generacion" << endl;
@@ -99,7 +151,7 @@ int binToDec(int binario)
 }
 
 /**
- * Constructor de Gladiador.
+ * Constructor de Estudiante.
  * @param generacion
  * @param padre1
  * @param padre2
@@ -139,7 +191,7 @@ Estudiante::Estudiante(int generacion, Estudiante *padre1, Estudiante *padre2)
         setResistenciaMagos(binToDec(atoi((cromosomaRM1+cromosomaRM2).c_str())));
         setResistenciaArtilleros(binToDec(atoi((cromosomaRArt1+cromosomaRArt2).c_str())));
         setResistenciaLanzaFuegos(binToDec(atoi((cromosomaRLF1+cromosomaRLF2).c_str())));
-        //setVida(); Hacer analisis
+        setVida(generacion);
     }
 }
 
@@ -179,9 +231,20 @@ void Estudiante::setNombre(string Nombre)
 }
 
 
-void Estudiante::setVida(int Vida)
+void Estudiante::setVida(int generation)
 {
-    vida = Vida;
+    if(getGeneracion() == generation - 5){
+        muerto=true;
+    }
+    else{
+        int Vida = 0;
+        Vida += 2*resistenciaArqueros;
+        Vida += 2*resistenciaMagos;
+        Vida += 2*resistenciaArtilleros;
+        Vida += 2*resistenciaLanzaFuegos;
+        vida = Vida;
+    }
+
 }
 
 
@@ -296,9 +359,34 @@ int Estudiante::getTipo()
     return tipo;
 }
 
-void Estudiante::setTipo(int value)
+
+/* Metodo para setear tipo a estudiante que no es de la primera generacion
+ */
+
+void Estudiante::setTipo()
 {
+    int value = rand() % 4 +1;
     tipo = value;
+}
+
+/* Metodo para setear tipo a estudiante que no es de la primera generacion
+ * @param tipoPadre1
+ * @param tipoPadre2
+ */
+
+void Estudiante::setTipo(int tipoPadre1, int tipoPadre2){
+    if(tipoPadre1 == tipoPadre2){
+        tipo = tipoPadre1;
+    }
+    else{
+        int value = rand() % 2 +1;
+        if (value == 1){
+            tipo = tipoPadre1;
+        }
+        else{
+            tipo = tipoPadre2;
+        }
+    }
 }
 
 void Estudiante::setMutante(bool value)

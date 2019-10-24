@@ -20,14 +20,12 @@ public:
     ///Metodos
     void morir();
     void mutacion(string *gen);
-    void generateHits();
     void restarResistencia(int valor);
-    int getArrowDirection(int pathIndex, int towerIndex);
-    int getHitTower(int pathIndex, int arrowIdex);
 
     ///Getters & Setters
     void setNombre(string Nombre);
-    void setVida(int Vida);
+    void setVida(int generation);
+
     void setVelocidad(int Velocity);
     void setResistenciaArqueros(int RArq);
     void setResistenciaMagos(int RM);
@@ -40,6 +38,10 @@ public:
     void setGeneracion(int _generacion);
 
     void setMutante(bool muto);
+    void setTipo();
+    void setTipo(int tipoPadre1, int tipoPadre2);
+
+
 
     //void setCuadricula(Cuadricula* _cuadricula);
 
@@ -53,18 +55,16 @@ public:
     bool getMuerto();
     vector<int> getPathToGoal();
     //Cuadricula* getCuadricula();
-    bool isHit(int pathIndex, int arrowIndex);
     string getNombrePadre1();
     string getNombrePadre2();
     int getGeneracion();
     bool getMutante();
     int getTipo();
-    void setTipo(int type);
 
 private:
 
     string nombre;
-    int tipo;
+    int tipo; ///Tipo #1: Ogro, Tipo #2: Elfo Oscuro, Tipo #3: Harpia, Tipo #4: Mercenario
     int vida;
     int velocidad;
     int resistenciaArqueros;
