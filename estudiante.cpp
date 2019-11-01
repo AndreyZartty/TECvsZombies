@@ -394,10 +394,10 @@ void Estudiante::setMutante(bool value)
     mutante = value;
 }
 
-/*Cuadricula* Gladiador::getCuadricula() {
+Cuadricula* Estudiante::getCuadricula() {
     return cuadricula;
 }
 
-void Gladiador::setCuadricula(Cuadricula* _cuadricula) {
+void Estudiante::setCuadricula(Cuadricula* _cuadricula) {
     cuadricula = _cuadricula;
-}*/
+}

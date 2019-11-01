@@ -16,19 +16,31 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    astar.cpp \
+    backtracking.cpp \
+    cuadricula.cpp \
     estudiante.cpp \
+    juego.cpp \
     list.cpp \
     main.cpp \
     mainwindow.cpp \
+    node.cpp \
     nodeg.cpp \
-    poblacion.cpp
+    poblacion.cpp \
+    torre.cpp
 
 HEADERS += \
+    astar.h \
+    backtracking.h \
+    cuadricula.h \
     estudiante.h \
+    juego.h \
     list.h \
     mainwindow.h \
+    node.h \
     nodeg.h \
-    poblacion.h
+    poblacion.h \
+    torre.h
 
 FORMS += \
     mainwindow.ui
