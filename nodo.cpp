@@ -3,6 +3,9 @@
 #include <tablero.h>
 #include <modificarcurso1.h>
 #include <QPalette>
+#include <iostream>
+
+using namespace std;
 
 //CONSTRUCTOR
 nodo::nodo(int col, int fil):x(200+col*80),y(50+fil*60),col(col),fil(fil)
@@ -64,9 +67,26 @@ void nodo::eliminar(){
 }
 
 void nodo::actualizar(){
-    boton->setIconSize(QSize(50,50));
-    boton->setIcon(Curso->imagen);
-    pantallaModificarCurso->hide();
+    if(Curso->Upgrade()){
+        if(Curso->getUpgrade() == 2){
+            boton->setIconSize(QSize(40,40));
+            boton->setIcon(Curso->imagen);
+            pantallaModificarCurso->hide();
+            cout << "Upgrade 2" << endl;
+
+        }
+        else{
+            boton->setIconSize(QSize(20,20));
+            boton->setIcon(Curso->imagen);
+            pantallaModificarCurso->hide();
+            cout << "Upgrade 3" << endl;
+
+        }
+    }
+    else{
+        cout << "NO PUEDE ACTUALIZAR" << endl;
+    }
+
 }
 
 //Cuando se selecciona un nodo y se agrega un curso, genera adyacentes

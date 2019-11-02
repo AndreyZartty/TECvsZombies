@@ -1,5 +1,7 @@
 #include "mainwindow.h"
 #include "poblacion.h"
+#include "tablero.h"
+
 
 #include <QApplication>
 #include <iostream>

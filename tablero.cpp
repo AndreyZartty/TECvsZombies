@@ -28,7 +28,7 @@ Tablero::~Tablero()
 //BUsca los nodos adyacentes segun el alcance
 void Tablero::generarAdyacentes(nodo* seleccionado){
     qDebug()<<"aqui en tablero"<<seleccionado;
-    int alcance = seleccionado->Curso->alcance;
+    int alcance = seleccionado->Curso->getAlcance();
 
     for(int y = -alcance; y<alcance+1;y++){
         for (int x = -alcance;x<alcance+1;x++){
@@ -45,7 +45,7 @@ void Tablero::generarAdyacentes(nodo* seleccionado){
 
 void Tablero::eliminarAdyacentes(nodo* seleccionado){
     qDebug()<<"aqui en tablero"<<seleccionado;
-    int alcance = seleccionado->Curso->alcance;
+    int alcance = seleccionado->Curso->getAlcance();
 
     for(int y = -alcance; y<alcance+1;y++){
         for (int x = -alcance;x<alcance+1;x++){
