@@ -11,5 +11,8 @@
         <file>est1.png</file>
         <file>est2.png</file>
         <file>tileversions.png</file>
+        <file>yellow.png</file>
+        <file>black.jpg</file>
+        <file>blue.jpg</file>
     </qresource>
 </RCC>

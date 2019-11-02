@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>300</height>
+    <height>253</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,7 +17,7 @@
    <property name="geometry">
     <rect>
      <x>50</x>
-     <y>190</y>
+     <y>170</y>
      <width>89</width>
      <height>25</height>
     </rect>
@@ -30,13 +30,26 @@
    <property name="geometry">
     <rect>
      <x>270</x>
-     <y>190</y>
+     <y>170</y>
      <width>89</width>
      <height>25</height>
     </rect>
    </property>
    <property name="text">
     <string>Delete</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>80</x>
+     <y>60</y>
+     <width>281</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>QUÉ DESEA HACER CON EL CURSO</string>
    </property>
   </widget>
  </widget>

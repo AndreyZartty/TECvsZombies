@@ -7,6 +7,15 @@ modificarCurso1::modificarCurso1(QWidget *parent) :
     ui(new Ui::modificarCurso1)
 {
     ui->setupUi(this);
+
+    //SETEA LA IMAGEN
+    QPixmap imagenFondo(":/tileversions.png");
+    imagenFondo = imagenFondo.scaled(this->size(), Qt::IgnoreAspectRatio);
+    QPalette palette;
+    palette.setBrush(QPalette::Background, imagenFondo);
+    this->setAutoFillBackground(true);
+    this->setPalette(palette);
+    this->saveGeometry();
 }
 
 modificarCurso1::~modificarCurso1()

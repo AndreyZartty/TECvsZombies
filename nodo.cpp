@@ -4,6 +4,7 @@
 #include <modificarcurso1.h>
 #include <QPalette>
 #include <iostream>
+#include <QDialog>
 
 using namespace std;
 
@@ -43,7 +44,7 @@ nodo::nodo(int col, int fil):x(200+col*80),y(50+fil*60),col(col),fil(fil)
     //Cuando se escoge alguna torre, actualiza este
     connect(pantallaAgregarCurso,SIGNAL(cursoCreado()),this,SLOT(modificarNodo()));
 
-    //Para eliminar la torre
+    //Para eliminar o actualizar la torre
     connect(pantallaModificarCurso,SIGNAL(eliminarCurso()),this,SLOT(eliminar()));
     connect(pantallaModificarCurso,SIGNAL(actualizarCurso()),this,SLOT(actualizar()));
 }
@@ -56,7 +57,11 @@ void nodo::eliminar(){
 
     //Le setea la imagen al botón
     boton->setIcon(imagenFondo);
-    boton->setIconSize(QSize(50,50));
+    boton->setIconSize(QSize(42,42));
+    QPalette palette = boton->palette();
+    palette.setColor(QPalette::Button, QColor(Qt::black));
+    boton->setPalette(palette);
+
     //emite la señal
     emit cursoEliminado(this);
 
@@ -66,25 +71,65 @@ void nodo::eliminar(){
     Curso= nullptr;
 }
 
+//SI se quiere actualizar una torre, hace esto
 void nodo::actualizar(){
+    //CHEQUEA EN CURSO Y DEVUELVE EL NIVEL
     if(Curso->Upgrade()){
+        //PRIMER UPGRADE
         if(Curso->getUpgrade() == 2){
-            boton->setIconSize(QSize(40,40));
+            //AQUI CREA EL COLOR DE LOS BOTONES
+            QPalette palette = boton->palette();
+            palette.setColor(QPalette::Button, QColor(Qt::blue));
+            boton->setPalette(palette);
+
+            //DEFINE EL ICONO DE LA TORRE EN EL NODO
+            boton->setIconSize(QSize(42,42));
             boton->setIcon(Curso->imagen);
             pantallaModificarCurso->hide();
             cout << "Upgrade 2" << endl;
 
         }
+        //SEGUNDO UPGRADE NIVEL MÁXIMO
         else{
-            boton->setIconSize(QSize(20,20));
+            //MODIFICA GRAFICA CURSO
+            //AQUI CREA EL COLOR DE LOS BOTONES
+            QPalette palette = boton->palette();
+            palette.setColor(QPalette::Button, QColor(Qt::yellow));
+            boton->setPalette(palette);
+
+            //AQUI SETEA LA IMAGEN
+            boton->setIconSize(QSize(42,42));
             boton->setIcon(Curso->imagen);
+
+            //ELIMINA LA PANTALLA DE MODIFICAR EL CURSO
             pantallaModificarCurso->hide();
             cout << "Upgrade 3" << endl;
 
         }
     }
+    //MUESTRA QUE NO SE PUEDE ACTUALIZAR MÁS
     else{
-        cout << "NO PUEDE ACTUALIZAR" << endl;
+        QDialog *dialogo = new QDialog();
+        dialogo->setVisible(true);
+        dialogo->show();
+        dialogo->setGeometry(300,100,400,200);
+        QLabel *texto = new QLabel("NO SE PUEDE ACTUALIZAR MÁS");
+
+        //TEXTO DE NO SE PUEDE ACTUALIZAR MÁS
+        texto->setParent(dialogo);
+        texto->setGeometry(90,0,400,200);
+        texto->setAlignment(Qt::AlignHCenter);
+        texto->setAlignment(Qt::AlignVCenter);
+        texto->setVisible(true);
+
+        //FONDO DEL DIALOGO
+        QPixmap imagenFondo(":/tileversions.png");
+        imagenFondo = imagenFondo.scaled(this->size(), Qt::IgnoreAspectRatio);
+        QPalette palette;
+        palette.setBrush(QPalette::Background, imagenFondo);
+        dialogo->setAutoFillBackground(true);
+        dialogo->setPalette(palette);
+        dialogo->saveGeometry();
     }
 
 }
@@ -96,13 +141,6 @@ void nodo::setParent(Tablero *parent){
 
     boton->setParent(parent);
 }
-/*
-void nodo::eliminaCurso(Tablero *parent){
-    connect(this,SIGNAL(cursoEliminado(nodo*)),parent,SLOT(eliminarAdyacentes(nodo*)));
-    boton->setParent(parent);
-}*/
-
-
 
 //AL darle click al nodo
 void nodo::onClick(){
@@ -117,6 +155,8 @@ void nodo::onClick(){
 
     }
 }
+
+//AGREGAR EL CURSO AL NODO
 void nodo::modificarNodo(){
     //Este es el curso seleccionada
     Curso = pantallaAgregarCurso->Curso;
