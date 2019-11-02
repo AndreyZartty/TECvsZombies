@@ -5,11 +5,12 @@
 #include <QPalette>
 #include <iostream>
 #include <QDialog>
+#include <algorithm>
+#include <estudiante.h>
 
 using namespace std;
 
-//CONSTRUCTOR
-nodo::nodo(int col, int fil):x(200+col*80),y(50+fil*60),col(col),fil(fil)
+nodo::nodo(int col, int fil):x(120+col*80),y(50+fil*60),col(col),fil(fil)
 {
     Curso = nullptr;
     //boton es la torre
@@ -134,12 +135,16 @@ void nodo::actualizar(){
 
 //Cuando se selecciona un nodo y se agrega un curso, genera adyacentes
 void nodo::setParent(Tablero *parent){
+    par = parent;
     connect(this,SIGNAL(cursoCreado(nodo*)),parent,SLOT(generarAdyacentes(nodo*)));
     connect(this,SIGNAL(cursoEliminado(nodo*)),parent,SLOT(eliminarAdyacentes(nodo*)));
 
     boton->setParent(parent);
 }
 
+void nodo::agregarEstudiante(estudiante *e){
+    listaEstudiantes.push_back(e);
+}
 //AL darle click al nodo
 void nodo::onClick(){
     if (Curso==nullptr){
@@ -150,13 +155,51 @@ void nodo::onClick(){
         pantallaModificarCurso->show();
 
     }
+void nodo::eliminarEstudiante(estudiante *e){
+    std::vector<estudiante*>::iterator position = std::find(listaEstudiantes.begin(),listaEstudiantes.end(),e);
+    if (position != listaEstudiantes.end()){
+        listaEstudiantes.erase(position);
+    }
+}
+void nodo::atacar(){
+    for (int est=0;est<listaEstudiantes.size();est++){
+        listaEstudiantes[est]->siendoEvaluado(5);
+    }
+}
+
+bool nodo::tieneVigilante(){
+    return vigilante!=nullptr;
+}
+
+void nodo::solicitarEvaluacion(nodo*target){
+    /*
+    connect(vigilante->examen,SIGNAL(termino()),this,SLOT(atacar()));
+    vigilante->examen->evaluar(target->x,target->y);*/
+    vigilante->examen->imagen->setParent(par);
+    vigilante->examen->evaluar(100,100);
+    qDebug()<<vigilante;
+}
+
+void nodo::onClick(){
+    p->show();
+    qDebug()<<"Toca el botón"<<boton;
+    qDebug()<<"En el nodo"<<this;
 }
 
 //AGREGAR EL CURSO AL NODO
+bool nodo::isFree(){
+    return Curso==nullptr;
+}
+
+
 void nodo::modificarNodo(){
     //Este es el curso seleccionada
     Curso = pantallaAgregarCurso->Curso;
     boton->setIconSize(QSize(42,42));
+    Curso = p->Curso;
+    Curso->examen->setParent();
+    Curso->examen->setOrigen(x,y);
+    boton->setIconSize(QSize(50,50));
     boton->setIcon(Curso->imagen);
 
     //AQUI CREA EL COLOR DE LOS BOTONES

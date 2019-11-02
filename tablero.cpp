@@ -4,9 +4,11 @@
 #include <QPalette>
 #include <QRect>
 #include <QPushButton>
+#include <estudiante.h>
 
 #include "poblacion.h"
 #include "stats.h"
+
 
 Tablero::Tablero(QWidget *parent) :
     QMainWindow(parent),
@@ -16,6 +18,9 @@ Tablero::Tablero(QWidget *parent) :
 
     ui->setupUi(this);
     //AGREGA LOS BOTONES
+    revisa = new workerRevisar;
+    connect(revisa,SIGNAL(progreso()),this,SLOT(revisaNodos()));
+    revisa->start();
     crearMatriz();
     this->setFixedSize(QSize(1200, 720));
 
@@ -105,6 +110,26 @@ Tablero::~Tablero()
     delete ui;
 }
 
+
+void Tablero::revisaNodos(){
+    for (int ind=0; ind<listaEstudiantes.size();ind++){
+        int ex=listaEstudiantes[ind]->h->x();
+        int ey=listaEstudiantes[ind]->h->y();
+        for (int i=0;i<10;i++){
+            for (int j=0;j<10;j++){
+                int nodoX=matriz[i][j]->x;
+                int nodoY=matriz[i][j]->y;
+                listaEstudiantes[ind]->salioNodoActual();
+                if(ex+50<=nodoX+50 && ex+50>=nodoX && ey+50<=nodoY+50 && ey+50>=nodoY){
+                    if (listaEstudiantes[ind]->actual==nullptr){
+                        listaEstudiantes[ind]->setNodoActual(matriz[i][j]);
+                    }
+                 }
+            }
+        }
+    }
+}
+
 //BUsca los nodos adyacentes segun el alcance
 void Tablero::generarAdyacentes(nodo* seleccionado){
     qDebug()<<"aqui en tablero"<<seleccionado;
@@ -163,22 +188,8 @@ void Tablero::crearMatriz(){
             temp->setParent(this);
         }
     }
-
+    estudiante *e = new estudiante();
+    e->setParent(this);
+    e->buscarCamino(matriz);
+    listaEstudiantes.push_back(e);
 }
-
-
-void Tablero::mover(){
-
-    QLabel *h;
-    h = new QLabel("hola", this);
-    h->setPixmap(QPixmap(":/house.png"));
-    h->setScaledContents(true);
-
-    animation = new QPropertyAnimation(h,"geometry");
-    animation->setDuration(2000);
-    animation->setStartValue(QRect(0,0,100,100));
-    animation->setEndValue(QRect(900,200,100,100));
-    animation->start();
-}
-
-
