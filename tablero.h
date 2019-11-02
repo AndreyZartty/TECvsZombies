@@ -23,6 +23,7 @@ public:
     ~Tablero();
 public slots:
     void generarAdyacentes(nodo*);
+    void eliminarAdyacentes(nodo*);
 private:
     Ui::Tablero *ui;
     nodo* matriz[10][10];

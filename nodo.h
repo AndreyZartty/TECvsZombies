@@ -5,6 +5,7 @@
 #include <QDebug>
 #include <curso.h>
 #include <crearcurso.h>
+#include <modificarcurso1.h>
 
 
 class Tablero;
@@ -18,9 +19,13 @@ public slots:
     void onClick();
     void modificarNodo();
 
+    void actualizar();
+    void eliminar();
+
 public:
     nodo(int corx, int cory);
     void setParent(Tablero*);
+    void eliminaCurso(Tablero*);
     void setVigilante(curso*);
     QToolButton * boton;
     curso *Curso= nullptr;
@@ -33,10 +38,13 @@ public:
 
 signals:
     void cursoCreado(nodo*);
+    void cursoEliminado(nodo*);
+    void cursoActualizado(nodo*);
 
 private:
     curso* vigilante;
-    crearCurso *p;
+    crearCurso *pantallaAgregarCurso;
+    modificarCurso1 *pantallaModificarCurso;
 };
 
 #endif // NODO_H

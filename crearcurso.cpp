@@ -7,6 +7,13 @@ crearCurso::crearCurso(QWidget *parent) :
     ui(new Ui::crearCurso)
 {
     ui->setupUi(this);
+    QPixmap imagenFondo(":/tileversions.png");
+        imagenFondo = imagenFondo.scaled(this->size(), Qt::IgnoreAspectRatio);
+        QPalette palette;
+        palette.setBrush(QPalette::Background, imagenFondo);
+    this->setAutoFillBackground(true);
+    this->setPalette(palette);
+    this->saveGeometry();
 }
 
 crearCurso::~crearCurso()

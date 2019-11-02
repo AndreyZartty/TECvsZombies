@@ -10,5 +10,6 @@
         <file>torre4.png</file>
         <file>est1.png</file>
         <file>est2.png</file>
+        <file>tileversions.png</file>
     </qresource>
 </RCC>

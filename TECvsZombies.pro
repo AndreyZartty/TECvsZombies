@@ -29,6 +29,7 @@ SOURCES += \
         curso.cpp \
         estudiante.cpp \
         main.cpp \
+        modificarcurso1.cpp \
         nodo.cpp \
         tablero.cpp
 
@@ -36,11 +37,13 @@ HEADERS += \
         crearcurso.h \
         curso.h \
         estudiante.h \
+        modificarcurso1.h \
         nodo.h \
         tablero.h
 
 FORMS += \
         crearcurso.ui \
+        modificarcurso1.ui \
         tablero.ui
 
 # Default rules for deployment.
