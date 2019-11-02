@@ -1,8 +1,11 @@
-QT       += core gui
+QT       += core gui multimediawidgets
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++11
+
+TEMPLATE = app
+TARGET = TECvsZombies
 
 # The following define makes your compiler emit warnings if you use
 # any Qt feature that has been marked deprecated (the exact warnings
@@ -27,6 +30,11 @@ SOURCES += \
     node.cpp \
     nodeg.cpp \
     poblacion.cpp \
+    crearcurso.cpp \
+    curso.cpp \
+    modificarcurso1.cpp \
+    nodo.cpp \
+    tablero.cpp \
     torre.cpp
 
 HEADERS += \
@@ -40,12 +48,25 @@ HEADERS += \
     node.h \
     nodeg.h \
     poblacion.h \
+    crearcurso.h \
+    curso.h \
+    modificarcurso1.h \
+    nodo.h \
+    tablero.h \
     torre.h
 
 FORMS += \
+    crearcurso.ui \
+    modificarcurso1.ui \
+    tablero.ui \
     mainwindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+DISTFILES +=
+
+RESOURCES += \
+    recursos.qrc

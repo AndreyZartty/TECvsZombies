@@ -9,7 +9,7 @@ using namespace std;
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    MainWindow w;
+    Tablero w;
     w.show();
     int random = 28 / 10;
     cout << random << endl;
