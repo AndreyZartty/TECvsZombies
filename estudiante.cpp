@@ -440,11 +440,25 @@ Estudiante::Estudiante()
 
 }
 void Estudiante::caminar(nodo* ini, nodo* fin){
+    if(tipo == 1){ //Ogro
+        h->setPixmap(QPixmap(":/ogre.png"));
 
-    h->setPixmap(QPixmap(":/est1.png"));
+    }
+    else if(tipo == 2){ //Elfo
+        h->setPixmap(QPixmap(":/elf.png"));
+
+    }
+    else if(tipo == 3){ //Harpia
+        h->setPixmap(QPixmap(":/harpia.jpg"));
+
+    }
+    else if(tipo == 4){ //Mercenario
+        h->setPixmap(QPixmap(":/mercenary.png"));
+
+    }
     h->setScaledContents(true);
 
-    animation->setDuration(2000);
+    animation->setDuration(8000 - velocidad*1000);
 
     if(ini==nullptr){
         animation->setStartValue(QRect(0,0,50,50));
@@ -453,7 +467,7 @@ void Estudiante::caminar(nodo* ini, nodo* fin){
     }
 
     if (fin == nullptr){
-        animation->setEndValue(QRect(900,500,50,50));
+        animation->setEndValue(QRect(1050,350,50,50));
     } else {
         animation->setEndValue(QRect(fin->x,fin->y,50,50));
     }

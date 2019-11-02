@@ -14,5 +14,9 @@
         <file>yellow.png</file>
         <file>black.jpg</file>
         <file>blue.jpg</file>
+        <file>elf.png</file>
+        <file>harpia.jpg</file>
+        <file>mercenary.png</file>
+        <file>ogre.png</file>
     </qresource>
 </RCC>
