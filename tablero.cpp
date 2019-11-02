@@ -74,11 +74,28 @@ Tablero::Tablero(QWidget *parent) :
     labelTexto3->setParent(this);
     labelTexto3->setVisible(true);
 
+    //Boton para mostrar estadisticas
     QPushButton *Stats = new QPushButton("Mostrar estadisticas");
-    Stats->setGeometry(40,600,120,20);
+    Stats->setGeometry(30,600,150,20);
     Stats->setParent(this);
     Stats->show();
     connect(Stats,SIGNAL(clicked()),this, SLOT(on_Stats_clicked()));
+
+    //Boton APROBACION INDIVIDUAL
+    QPushButton *aprobacionIndividual = new QPushButton("Aprobación Individual");
+    aprobacionIndividual->setGeometry(30,100,160,25);
+    aprobacionIndividual->setParent(this);
+    aprobacionIndividual->show();
+    //connect(Stats,SIGNAL(clicked()),this, SLOT(on_Stats_clicked()));
+
+    //Boton APROBACION COLECTIVA
+    QPushButton *aprobacionColectiva = new QPushButton("Aprobación Colectiva");
+    aprobacionColectiva ->setGeometry(30,140,160,25);
+    aprobacionColectiva->setParent(this);
+    aprobacionColectiva->show();
+    //connect(Stats,SIGNAL(clicked()),this, SLOT(on_Stats_clicked()));
+
+
 }
 
 

@@ -6,6 +6,10 @@ Stats::Stats(QWidget *parent) :
     ui(new Ui::Stats)
 {
     ui->setupUi(this);
+    QPalette palette;
+    //change some color roles
+    palette.setColor(QPalette::Window, QColor(152, 251, 152));
+    this->setPalette(palette);
 }
 
 void Stats::setPoblacion(Poblacion *pob)
