@@ -28,9 +28,8 @@ private:
     Node* nodoInicio;
     Node* nodoFinal;
     Poblacion *poblacion1;
-    Poblacion *poblacion2;
     List MejoresP1;
-    List MejoresP2;
+    Estudiante *EstudianteAStar;
 
 
 
@@ -52,11 +51,10 @@ public:
     Backtracking* getBacktrackingAlgorithm();
     void setBacktrackingAlgorithm(Backtracking* _backtrackingAlgorithm);
     Poblacion* getPoblacion1();
-    Poblacion* getPoblacion2();
     List getMejoresP1();
-    List getMejoresP2();
     void setMejoresP1(List mejores);
-    void setMejoresP2(List mejores);
+    void setEstudianteAStar(Estudiante *aStar);
+    Estudiante *getEstudianteAStar();
 
 
 };

@@ -20,19 +20,17 @@ Juego::Juego() {
     backtrackingAlgorithm = new Backtracking(cuadricula);
 
     ///Poblaciones
-    poblacion1 = new Poblacion("Lannister");
-    poblacion2 = new Poblacion("Stark");
+    poblacion1 = new Poblacion("Stark");
 
     MejoresP1 = poblacion1->getPadres();
-    MejoresP2 = poblacion2->getPadres();
 
     for(int i = 0; i < MejoresP1.getSize() ; i++){
         MejoresP1.recorrer(i)->setCuadricula(cuadricula);
     }
-    for(int i = 0; i < MejoresP2.getSize() ; i++){
-        MejoresP2.recorrer(i)->setCuadricula(cuadricula);
-    }
-
+    MejoresP1.bubbleSort();
+    int random = rand() % (MejoresP1.getSize()-1);
+    EstudianteAStar = MejoresP1.recorrer(random);
+    MejoresP1.swap(EstudianteAStar,MejoresP1.getLast()->get_data());
 }
 
 
@@ -54,9 +52,7 @@ void Juego::doAStar() {
     ///Se rota el path
     aStarAlgorithm->rotatePath();
     ///Ingresa el path a su respectivo gladiador
-    for(int i = 0; i < MejoresP1.getSize() ; i++){
-        MejoresP1.recorrer(i)->setPathToGoal(aStarAlgorithm->getPathToGoal());
-    }
+    EstudianteAStar->setPathToGoal(aStarAlgorithm->getPathToGoal());
 
     /*  ///Se generara una matriz con los hits que le hacen las torres y sus respectivos tipos
     gladiador1->generateHits();*/
@@ -78,8 +74,8 @@ void Juego::doBacktracking() {
     ///Se rota el path
     backtrackingAlgorithm->rotatePath();
     ///Ingresa el path a su respectivo gladiador
-    for(int i = 0; i < MejoresP2.getSize() ; i++){
-        MejoresP2.recorrer(i)->setPathToGoal(aStarAlgorithm->getPathToGoal());
+    for(int i = 0; i < MejoresP1.getSize()-1 ; i++){
+        MejoresP1.recorrer(i)->setPathToGoal(aStarAlgorithm->getPathToGoal());
     }
 
     /* ///Se generara una matriz con los hits que le hacen las torres y sus respectivos tipos
@@ -261,30 +257,15 @@ Poblacion* Juego::getPoblacion1() {
     return poblacion1;
 }
 
-/**
- * Getter de poblacion2 de Jugador
- * @return poblacion2
- */
-Poblacion* Juego::getPoblacion2() {
-    return poblacion2;
-}
 
 List Juego::getMejoresP1()
 {
     return MejoresP1;
 }
 
-List Juego::getMejoresP2()
-{
-    return MejoresP2;
-}
 
 void Juego::setMejoresP1(List mejores)
 {
     MejoresP1 = mejores;
 }
 
-void Juego::setMejoresP2(List mejores)
-{
-    MejoresP2 = mejores;
-}

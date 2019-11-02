@@ -163,6 +163,7 @@ Estudiante::Estudiante(int generacion, Estudiante *padre1, Estudiante *padre2)
         cout << "No introduzca padres, ya que no es de la primera generacion" << endl;
     }
     else {
+        setTipo(padre1->getTipo(),padre2->getTipo());
         string cromosomaVelo1 = decToBinary(padre1->getVelocidad()).substr(0,2);
         string cromosomaVelo2 = decToBinary(padre2->getVelocidad()).substr(2,4);
 
