@@ -1,4 +1,5 @@
 #include "mainwindow.h"
+#include "poblacion.h"
 
 #include <QApplication>
 #include <iostream>
@@ -20,5 +21,11 @@ int main(int argc, char *argv[])
     cout << random << endl;
     random = rand() % 4 + 1;
     cout << random << endl;
+
+    Poblacion *xd = new Poblacion("lol");
+    xd->nuevageneracion();
+    xd->nuevageneracion();
+
+
     return a.exec();
 }

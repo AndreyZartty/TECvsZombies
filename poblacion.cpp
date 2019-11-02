@@ -151,7 +151,7 @@ void Poblacion::nuevageneracion(){
         insertarEstudiante(estudiante);
         insertarCopia(estudiante);
         listgeneracion->insertLast(estudiante);
-        cout<< "Se ha creado el estudiante: "<< estudiante->getNombre() <<" gen: "<<getGeneracion()<<" vida: "<<estudiante->getVida()<<endl;
+        cout<< "Se ha creado el estudiante: "<< estudiante->getNombre() <<" gen: "<<getGeneracion()<<" vida: "<<estudiante->getVida()<< " hijo de: "<< estudiante->getNombrePadre1() << " y " << estudiante->getNombrePadre2() <<endl;
     }
 
     for (int i=0; i <8; i+=2){
@@ -173,7 +173,7 @@ void Poblacion::nuevageneracion(){
         insertarEstudiante(estudiante);
         insertarCopia(estudiante);
         listgeneracion->insertLast(estudiante);
-        cout<< "Se ha creado el estudiante: "<< estudiante->getNombre() <<" gen: "<<getGeneracion()<<" vida: "<<estudiante->getVida()<<endl;
+        cout<< "Se ha creado el estudiante: "<< estudiante->getNombre() <<" gen: "<<getGeneracion()<<" vida: "<<estudiante->getVida()<< " hijo de: "<< estudiante->getNombrePadre1() << " y " << estudiante->getNombrePadre2() <<endl;
     }
     generaciones.push_back(listgeneracion);
     estudiantes.bubbleSort();
