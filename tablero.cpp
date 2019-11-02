@@ -10,6 +10,7 @@
 #include "juego.h"
 
 #include "poblacion.h"
+#include "list.h"
 
 
 
@@ -157,52 +158,61 @@ void Tablero::on_aprobacionIndividual_clicked()
     vector<int> path = game->getBacktrackingAlgorithm()->getPathToGoal();
     vector<nodo*> pathNode;
 
-
-
-    for(int c=0; c<path.size() ; c++){
-        for (int i = 0 ; i < 10 ; i++) {
-            for (int j = 0 ; j < 10 ; j++) {
-
-                if (matriz[i][j]->id == path[c]) {
-
-                    pathNode.push_back(matriz[i][j]);
-
-                }
-
-            }
-
-        }
-    }
-
-    for(int i= 0 ; i < listaEstudiantes.size()-1; i++){
-        listaEstudiantes[i]->camino = pathNode;
-
-        //usleep(1000);
-    }
-    for(int i= 0 ; i < listaEstudiantes.size()-1; i++){
-        listaEstudiantes[i]->buscarCamino();
-        usleep(1000);
-    }
-
     game->doAStar();
-    path = game->getAStarAlgorithm()->getPathToGoal();
+    vector<int>path2 = game->getAStarAlgorithm()->getPathToGoal();
     vector<nodo*> pathNode2;
-    for(int c=0; c<path.size() ; c++){
-        for (int i = 0 ; i < 10 ; i++) {
-            for (int j = 0 ; j < 10 ; j++) {
 
-                if (matriz[i][j]->id == path[c]) {
+    while(gen<3){
+        listaEstudiantes.clear();
+        generaciones[gen-1]->bubbleSort();
+        for (int i=0;i<8;i++) {
+            listaEstudiantes.push_back(generaciones[gen-1]->recorrer(i));
 
-                    pathNode2.push_back(matriz[i][j]);
+        }
+        for(int c=0; c<path.size() ; c++){
+         for (int i = 0 ; i < 10 ; i++) {
+                for (int j = 0 ; j < 10 ; j++) {
+
+                    if (matriz[i][j]->id == path[c]) {
+
+                        pathNode.push_back(matriz[i][j]);
+
+                    }
 
                 }
 
             }
+        }
+
+        for(int i= 0 ; i < listaEstudiantes.size()-1; i++){
+            listaEstudiantes[i]->camino = pathNode;
+
+          //usleep(1000);
+        }
+        for(int i= 0 ; i < listaEstudiantes.size()-1; i++){
+            listaEstudiantes[i]->buscarCamino();
 
         }
+
+
+        for(int c=0; c<path2.size() ; c++){
+            for (int i = 0 ; i < 10 ; i++) {
+                for (int j = 0 ; j < 10 ; j++) {
+
+                    if (matriz[i][j]->id == path2[c]) {
+
+                        pathNode2.push_back(matriz[i][j]);
+
+                    }
+
+                }
+
+            }
+        }
+        listaEstudiantes[listaEstudiantes.size()-1]->camino = pathNode2;
+        listaEstudiantes[listaEstudiantes.size()-1]->buscarCamino();
+        gen++;
     }
-    listaEstudiantes[listaEstudiantes.size()-1]->camino = pathNode2;
-    listaEstudiantes[listaEstudiantes.size()-1]->buscarCamino();
 
 }
 
@@ -280,9 +290,14 @@ void Tablero::crearMatriz(){
 
     Poblacion *e = new Poblacion("lol");
 
-    for(int i= 0 ; i < e->getPadres().getSize(); i++){
-        e->getPadres().recorrer(i)->setParent(this);
-        listaEstudiantes.push_back(e->getPadres().recorrer(i));
+    for(int i = 0; i < 10; i++){
+        e->nuevageneracion();
+    }
+    generaciones = e->getGeneraciones();
+    for(int i= 0 ; i < generaciones.size(); i++){
+        for(int j=0; j < generaciones[i]->getSize(); j++){
+            generaciones[i]->recorrer(j)->setParent(this);
+        }
     }
 
 }

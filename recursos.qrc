@@ -18,5 +18,7 @@
         <file>harpia.jpg</file>
         <file>mercenary.png</file>
         <file>ogre.png</file>
+        <file>harpy2.png</file>
+        <file>mercenary2.png</file>
     </qresource>
 </RCC>

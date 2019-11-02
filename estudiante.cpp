@@ -449,11 +449,11 @@ void Estudiante::caminar(nodo* ini, nodo* fin){
 
     }
     else if(tipo == 3){ //Harpia
-        h->setPixmap(QPixmap(":/harpia.jpg"));
+        h->setPixmap(QPixmap(":/harpy2.png"));
 
     }
     else if(tipo == 4){ //Mercenario
-        h->setPixmap(QPixmap(":/mercenary.png"));
+        h->setPixmap(QPixmap(":/mercenary2.png"));
 
     }
     h->setScaledContents(true);

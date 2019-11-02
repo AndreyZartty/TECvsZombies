@@ -8,6 +8,7 @@
 #include <nodo.h>
 #include <vector>
 #include <workerrevisar.h>
+class List;
 class Juego;
 
 
@@ -39,8 +40,9 @@ private:
     QPropertyAnimation *animation;
     workerRevisar *revisa;
     vector<Estudiante*> listaEstudiantes;
-
+    vector<List*> generaciones;
     Juego *game;
+    int gen=1;
 
 };
 
