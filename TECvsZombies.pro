@@ -27,6 +27,7 @@ CONFIG += c++11
 SOURCES += \
         crearcurso.cpp \
         curso.cpp \
+        estudiante.cpp \
         main.cpp \
         nodo.cpp \
         tablero.cpp
@@ -34,6 +35,7 @@ SOURCES += \
 HEADERS += \
         crearcurso.h \
         curso.h \
+        estudiante.h \
         nodo.h \
         tablero.h
 

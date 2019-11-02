@@ -6,6 +6,9 @@
 #include <curso.h>
 #include <crearcurso.h>
 
+
+class Tablero;
+
 class nodo;
 class nodo : public QWidget
 {
@@ -17,12 +20,22 @@ public slots:
 
 public:
     nodo(int corx, int cory);
-
+    void setParent(Tablero*);
+    void setVigilante(curso*);
     QToolButton * boton;
     curso *Curso= nullptr;
-private:
+    nodo* matriz[10][10];
     int x;
     int y;
+    int col;
+    int fil;
+
+
+signals:
+    void cursoCreado(nodo*);
+
+private:
+    curso* vigilante;
     crearCurso *p;
 };
 

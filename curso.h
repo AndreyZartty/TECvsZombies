@@ -12,6 +12,7 @@ public:
     curso();
     string nombre;
     QPixmap imagen;
+    int alcance;
 };
 
 #endif // CURSO_H

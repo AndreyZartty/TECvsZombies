@@ -6,6 +6,7 @@
 #include <QDebug>
 #include <QPropertyAnimation>
 #include <nodo.h>
+#include <vector>
 
 namespace Ui {
 class Tablero;
@@ -20,7 +21,8 @@ public:
     void mover();
     void crearMatriz();
     ~Tablero();
-
+public slots:
+    void generarAdyacentes(nodo*);
 private:
     Ui::Tablero *ui;
     nodo* matriz[10][10];
