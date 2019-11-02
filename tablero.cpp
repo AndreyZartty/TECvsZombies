@@ -1,6 +1,8 @@
 #include "tablero.h"
 #include "ui_tablero.h"
 #include <nodo.h>
+#include <estudiante.h>
+
 
 Tablero::Tablero(QWidget *parent) :
     QMainWindow(parent),
@@ -8,6 +10,9 @@ Tablero::Tablero(QWidget *parent) :
 {
 
     ui->setupUi(this);
+    revisa = new workerRevisar;
+    connect(revisa,SIGNAL(progreso()),this,SLOT(revisaNodos()));
+    revisa->start();
     crearMatriz();
 }
 
@@ -16,8 +21,27 @@ Tablero::~Tablero()
     delete ui;
 }
 
+
+void Tablero::revisaNodos(){
+    for (int ind=0; ind<listaEstudiantes.size();ind++){
+        int ex=listaEstudiantes[ind]->h->x();
+        int ey=listaEstudiantes[ind]->h->y();
+        for (int i=0;i<10;i++){
+            for (int j=0;j<10;j++){
+                int nodoX=matriz[i][j]->x;
+                int nodoY=matriz[i][j]->y;
+                listaEstudiantes[ind]->salioNodoActual();
+                if(ex+50<=nodoX+50 && ex+50>=nodoX && ey+50<=nodoY+50 && ey+50>=nodoY){
+                    if (listaEstudiantes[ind]->actual==nullptr){
+                        listaEstudiantes[ind]->setNodoActual(matriz[i][j]);
+                    }
+                 }
+            }
+        }
+    }
+}
+
 void Tablero::generarAdyacentes(nodo* seleccionado){
-    qDebug()<<"aqui en tablero"<<seleccionado;
     int alcance = seleccionado->Curso->alcance;
 
     for(int y = -alcance; y<alcance+1;y++){
@@ -31,8 +55,9 @@ void Tablero::generarAdyacentes(nodo* seleccionado){
             }
         }
     }
-
 }
+
+
 
 void Tablero::crearMatriz(){
     nodo *temp;
@@ -43,22 +68,8 @@ void Tablero::crearMatriz(){
             temp->setParent(this);
         }
     }
-
+    estudiante *e = new estudiante();
+    e->setParent(this);
+    e->buscarCamino(matriz);
+    listaEstudiantes.push_back(e);
 }
-
-
-void Tablero::mover(){
-
-    QLabel *h;
-    h = new QLabel("hola", this);
-    h->setPixmap(QPixmap(":/house.png"));
-    h->setScaledContents(true);
-
-    animation = new QPropertyAnimation(h,"geometry");
-    animation->setDuration(2000);
-    animation->setStartValue(QRect(0,0,100,100));
-    animation->setEndValue(QRect(900,200,100,100));
-    animation->start();
-}
-
-

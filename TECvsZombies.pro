@@ -28,16 +28,20 @@ SOURCES += \
         crearcurso.cpp \
         curso.cpp \
         estudiante.cpp \
+        evaluacion.cpp \
         main.cpp \
         nodo.cpp \
-        tablero.cpp
+        tablero.cpp \
+        workerrevisar.cpp
 
 HEADERS += \
         crearcurso.h \
         curso.h \
         estudiante.h \
+        evaluacion.h \
         nodo.h \
-        tablero.h
+        tablero.h \
+        workerrevisar.h
 
 FORMS += \
         crearcurso.ui \

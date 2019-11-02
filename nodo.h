@@ -5,8 +5,9 @@
 #include <QDebug>
 #include <curso.h>
 #include <crearcurso.h>
+#include <vector>
 
-
+class estudiante;
 class Tablero;
 
 class nodo;
@@ -17,11 +18,18 @@ class nodo : public QWidget
 public slots:
     void onClick();
     void modificarNodo();
+    void atacar();
 
 public:
     nodo(int corx, int cory);
     void setParent(Tablero*);
     void setVigilante(curso*);
+    bool isFree();
+    void agregarEstudiante(estudiante *);
+    void eliminarEstudiante(estudiante *);
+    bool tieneVigilante();
+    void solicitarEvaluacion(nodo*);
+
     QToolButton * boton;
     curso *Curso= nullptr;
     nodo* matriz[10][10];
@@ -29,13 +37,16 @@ public:
     int y;
     int col;
     int fil;
+    Tablero* par;
+    vector<estudiante*> listaEstudiantes;
 
 
 signals:
     void cursoCreado(nodo*);
 
 private:
-    curso* vigilante;
+
+    curso* vigilante=nullptr;
     crearCurso *p;
 };
 
