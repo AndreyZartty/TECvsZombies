@@ -146,8 +146,6 @@ void nodo::setParent(Tablero *parent){
 void nodo::onClick(){
     if (Curso==nullptr){
     pantallaAgregarCurso->show();
-    qDebug()<<"Toca el botón"<<boton;
-    qDebug()<<"En el nodo"<<this;
 
     //Se agrega la pantalla de eliminar y upgrade
     }else{
@@ -162,6 +160,12 @@ void nodo::modificarNodo(){
     Curso = pantallaAgregarCurso->Curso;
     boton->setIconSize(QSize(42,42));
     boton->setIcon(Curso->imagen);
+
+    //AQUI CREA EL COLOR DE LOS BOTONES
+    QPalette palette = boton->palette();
+    palette.setColor(QPalette::Button, QColor(Qt::black));
+    boton->setPalette(palette);
+
     //Se define el tipo de torre
     emit cursoCreado(this);
     pantallaAgregarCurso->hide();
@@ -171,11 +175,15 @@ void nodo::modificarNodo(){
 // Se define la torre vigilante, cual torre vigila los nodos
 void nodo::setVigilante(curso* cursoSeleccionado){
     vigilante = cursoSeleccionado;
+
+    //SI HAY UN CURSO EN UN ADYACENTE, NO LO PINTA ROJO
     if(cursoSeleccionado==nullptr){
         QPalette palette = boton->palette();
         palette.setColor(QPalette::Button, QColor(Qt::black));
         boton->setPalette(palette);
-    } else {
+
+     //SI NO TIENE NINGUN CURSO PINTA ROJO
+    } else if (Curso == nullptr){
         QPalette palette = boton->palette();
         palette.setColor(QPalette::Button, QColor(Qt::red));
         boton->setPalette(palette);
