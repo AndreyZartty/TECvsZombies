@@ -34,6 +34,7 @@ SOURCES += \
     curso.cpp \
     modificarcurso1.cpp \
     nodo.cpp \
+    stats.cpp \
     tablero.cpp \
     torre.cpp
 
@@ -52,12 +53,14 @@ HEADERS += \
     curso.h \
     modificarcurso1.h \
     nodo.h \
+    stats.h \
     tablero.h \
     torre.h
 
 FORMS += \
     crearcurso.ui \
     modificarcurso1.ui \
+    stats.ui \
     tablero.ui \
     mainwindow.ui
 

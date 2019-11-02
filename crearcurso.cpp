@@ -14,6 +14,7 @@ crearCurso::crearCurso(QWidget *parent) :
     this->setAutoFillBackground(true);
     this->setPalette(palette);
     this->saveGeometry();
+
 }
 
 crearCurso::~crearCurso()

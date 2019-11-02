@@ -23,6 +23,9 @@ public:
     string getNombrePoblacion();
     void nuevageneracion();
     vector <List*> getGeneraciones();
+    int getMutantes();
+    double getProbaMut();
+    double getProbaInv();
 
 
 
@@ -34,6 +37,9 @@ private:
     int generacion=1;
     Estudiante* mejor;
     vector <List*> generaciones;
+    int mutantes = 0;
+    double probaMut;
+    double probInv;
 };
 
 #endif // POBLACION_H

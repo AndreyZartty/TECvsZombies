@@ -3,11 +3,16 @@
 #include <nodo.h>
 #include <QPalette>
 #include <QRect>
+#include <QPushButton>
+
+#include "poblacion.h"
+#include "stats.h"
 
 Tablero::Tablero(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::Tablero)
 {
+
 
     ui->setupUi(this);
     //AGREGA LOS BOTONES
@@ -69,6 +74,11 @@ Tablero::Tablero(QWidget *parent) :
     labelTexto3->setParent(this);
     labelTexto3->setVisible(true);
 
+    QPushButton *Stats = new QPushButton("Mostrar estadisticas");
+    Stats->setGeometry(40,600,120,20);
+    Stats->setParent(this);
+    Stats->show();
+    connect(Stats,SIGNAL(clicked()),this, SLOT(on_Stats_clicked()));
 }
 
 
@@ -113,6 +123,16 @@ void Tablero::eliminarAdyacentes(nodo* seleccionado){
             }
         }
     }
+}
+
+void Tablero::on_Stats_clicked()
+{
+    Poblacion *xd = new Poblacion("lol");
+    Stats *eje = new Stats();
+    eje->setModal(true);
+    eje->setPoblacion(xd);
+    eje->setData();
+    eje->show();
 }
 
 

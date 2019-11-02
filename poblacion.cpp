@@ -26,9 +26,17 @@ Poblacion::Poblacion(string _nombrePoblacion)
         insertarCopia(estudiante);
         listagen->insertLast(estudiante);
         cout<< "Se ha creado el estudiante: "<< estudiante->getNombre() <<" gen: "<<getGeneracion()<<" vida: "<<estudiante->getVida()<< " tipo: " << estudiante->getTipo() <<endl ;
+        if(estudiante->getMutante()){
+            mutantes++;
+        }
     }
     setMejor();
     generaciones.push_back(listagen);
+    setPadres();
+    probaMut = (1.0000/99.0000) / 10.0000*generacion;
+    probInv = (1.0000/149.0000) / 10.0000*generacion;
+
+
 }
 
 int Poblacion::getGeneracion()
@@ -152,6 +160,9 @@ void Poblacion::nuevageneracion(){
         insertarCopia(estudiante);
         listgeneracion->insertLast(estudiante);
         cout<< "Se ha creado el estudiante: "<< estudiante->getNombre() <<" gen: "<<getGeneracion()<<" vida: "<<estudiante->getVida()<< " tipo: " << estudiante->getTipo() << " hijo de: "<< estudiante->getNombrePadre1() << " y " << estudiante->getNombrePadre2() <<endl;
+        if(estudiante->getMutante()){
+            mutantes++;
+        }
     }
 
     for (int i=0; i <8; i+=2){
@@ -174,11 +185,31 @@ void Poblacion::nuevageneracion(){
         insertarCopia(estudiante);
         listgeneracion->insertLast(estudiante);
         cout<< "Se ha creado el estudiante: "<< estudiante->getNombre() <<" gen: "<<getGeneracion()<<" vida: "<<estudiante->getVida()<< " tipo: " << estudiante->getTipo() << " hijo de: "<< estudiante->getNombrePadre1() << " y " << estudiante->getNombrePadre2() <<endl;
+        if(estudiante->getMutante()){
+            mutantes++;
+        }
     }
     generaciones.push_back(listgeneracion);
     estudiantes.bubbleSort();
+    probaMut = (1/99) / 10*generacion;
+    probInv = (1/149) / 10*generacion;
 }
 
 vector <List*> Poblacion::getGeneraciones() {
     return generaciones;
+}
+
+int Poblacion::getMutantes()
+{
+    return mutantes;
+}
+
+double Poblacion::getProbaMut()
+{
+    return probaMut;
+}
+
+double Poblacion::getProbaInv()
+{
+    return probInv;
 }

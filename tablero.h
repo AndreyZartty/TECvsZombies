@@ -24,10 +24,12 @@ public:
 public slots:
     void generarAdyacentes(nodo*);
     void eliminarAdyacentes(nodo*);
+    void on_Stats_clicked();
 private:
     Ui::Tablero *ui;
     nodo* matriz[10][10];
     QPropertyAnimation *animation;
+
 
 };
 

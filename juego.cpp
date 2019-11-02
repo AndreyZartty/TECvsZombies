@@ -269,3 +269,8 @@ void Juego::setMejoresP1(List mejores)
     MejoresP1 = mejores;
 }
 
+int Juego::getMuertos()
+{
+    return muertos;
+}
+

@@ -30,6 +30,7 @@ private:
     Poblacion *poblacion1;
     List MejoresP1;
     Estudiante *EstudianteAStar;
+    int muertos;
 
 
 
@@ -55,6 +56,7 @@ public:
     void setMejoresP1(List mejores);
     void setEstudianteAStar(Estudiante *aStar);
     Estudiante *getEstudianteAStar();
+    int getMuertos();
 
 
 };
