@@ -4,10 +4,14 @@
 #include <QPalette>
 #include <QRect>
 #include <QPushButton>
-#include <estudiante.h>
+#include <unistd.h>
+
+#include "stats.h"
+#include "juego.h"
 
 #include "poblacion.h"
-#include "stats.h"
+
+
 
 
 Tablero::Tablero(QWidget *parent) :
@@ -15,7 +19,7 @@ Tablero::Tablero(QWidget *parent) :
     ui(new Ui::Tablero)
 {
 
-
+    game = new Juego();
     ui->setupUi(this);
     //AGREGA LOS BOTONES
     revisa = new workerRevisar;
@@ -91,14 +95,14 @@ Tablero::Tablero(QWidget *parent) :
     aprobacionIndividual->setGeometry(30,100,160,25);
     aprobacionIndividual->setParent(this);
     aprobacionIndividual->show();
-    //connect(Stats,SIGNAL(clicked()),this, SLOT(on_Stats_clicked()));
+    connect(aprobacionIndividual,SIGNAL(clicked()),this, SLOT(on_aprobacionIndividual_clicked()));
 
     //Boton APROBACION COLECTIVA
     QPushButton *aprobacionColectiva = new QPushButton("Aprobación Colectiva");
     aprobacionColectiva ->setGeometry(30,140,160,25);
     aprobacionColectiva->setParent(this);
     aprobacionColectiva->show();
-    //connect(Stats,SIGNAL(clicked()),this, SLOT(on_Stats_clicked()));
+    connect(aprobacionColectiva,SIGNAL(clicked()),this, SLOT(on_aprobacionColectiva_clicked()));
 
 
 }
@@ -128,6 +132,86 @@ void Tablero::revisaNodos(){
             }
         }
     }
+}
+
+void Tablero::on_aprobacionIndividual_clicked()
+{
+    vector<int> torres;
+
+    for (int i = 0 ; i < 10 ; i++) {
+        for (int j = 0 ; j < 10 ; j++) {
+
+            if (!matriz[i][j]->isFree()) {
+
+                torres.push_back(matriz[i][j]->id);
+
+            }
+
+        }
+
+    }
+
+    game->getCuadricula()->setTowers(torres);
+
+    game->doBacktracking();
+    vector<int> path = game->getBacktrackingAlgorithm()->getPathToGoal();
+    vector<nodo*> pathNode;
+
+
+
+    for(int c=0; c<path.size() ; c++){
+        for (int i = 0 ; i < 10 ; i++) {
+            for (int j = 0 ; j < 10 ; j++) {
+
+                if (matriz[i][j]->id == path[c]) {
+
+                    pathNode.push_back(matriz[i][j]);
+
+                }
+
+            }
+
+        }
+    }
+
+    for(int i= 0 ; i < listaEstudiantes.size()-1; i++){
+        listaEstudiantes[i]->camino = pathNode;
+
+        //usleep(1000);
+    }
+    for(int i= 0 ; i < listaEstudiantes.size()-1; i++){
+        listaEstudiantes[i]->buscarCamino();
+        usleep(1000);
+    }
+
+    game->doAStar();
+    path = game->getAStarAlgorithm()->getPathToGoal();
+    vector<nodo*> pathNode2;
+    for(int c=0; c<path.size() ; c++){
+        for (int i = 0 ; i < 10 ; i++) {
+            for (int j = 0 ; j < 10 ; j++) {
+
+                if (matriz[i][j]->id == path[c]) {
+
+                    pathNode2.push_back(matriz[i][j]);
+
+                }
+
+            }
+
+        }
+    }
+    listaEstudiantes[listaEstudiantes.size()-1]->camino = pathNode2;
+    listaEstudiantes[listaEstudiantes.size()-1]->buscarCamino();
+
+}
+
+void Tablero::on_aprobacionColectiva_clicked()
+{
+    /*Estudiante *e = new Estudiante();
+    e->setParent(this);
+    e->buscarCamino(matriz);
+    listaEstudiantes.push_back(e);*/
 }
 
 //BUsca los nodos adyacentes segun el alcance
@@ -188,8 +272,19 @@ void Tablero::crearMatriz(){
             temp->setParent(this);
         }
     }
-    estudiante *e = new estudiante();
+    /*Estudiante *e = new Estudiante();
     e->setParent(this);
     e->buscarCamino(matriz);
-    listaEstudiantes.push_back(e);
+    listaEstudiantes.push_back(e);*/
+
+
+    Poblacion *e = new Poblacion("lol");
+
+    for(int i= 0 ; i < e->getPadres().getSize(); i++){
+        e->getPadres().recorrer(i)->setParent(this);
+        listaEstudiantes.push_back(e->getPadres().recorrer(i));
+    }
+
 }
+
+

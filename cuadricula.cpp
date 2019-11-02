@@ -185,6 +185,14 @@ Node* Cuadricula::getNode(int id) {
 
 }
 
+void Cuadricula::setTowers(vector<int> tt) {
+    for(int i = 0; i<tt.size(); i++){
+        towerIdList.push_back(tt[i]);
+        Torre *xd = new Torre(1);
+        getNode(tt[i])->setTorre(xd);
+    }
+}
+
 /**
  * Imprime toda la matriz con las caracteristicas de cada nodo.
  */

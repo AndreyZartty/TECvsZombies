@@ -10,17 +10,16 @@
 #include <iostream>
 #include <vector>
 #include "cuadricula.h"
-class estudiante;
-class estudiante : public QWidget
-{
-    Q_OBJECT
 
 #define ZONE_SIZE 10
 
 using namespace std;
 
+class Estudiante;
 
-
+class Estudiante : public QWidget
+{
+    Q_OBJECT
 
 public:
     ///Constructores
@@ -70,6 +69,19 @@ public:
     int getGeneracion();
     bool getMutante();
     int getTipo();
+    void caminar(nodo*,nodo*);
+    QLabel *h;
+    void setParent(Tablero*);
+    void buscarCamino();
+    void salioNodoActual();
+    void setNodoActual(nodo*);
+    void siendoEvaluado(int impacto);
+    nodo *actual=nullptr;
+    Estudiante();
+    vector<nodo*> camino;
+
+
+
 
 private:
 
@@ -94,24 +106,13 @@ private:
     string nombrePadre2;
 
     int generacion;
-    estudiante();
-    void caminar(nodo*,nodo*);
-    QLabel *h;
-    void setParent(Tablero*);
-    void buscarCamino(nodo* matriz[10][10]);
-    void salioNodoActual();
-    void setNodoActual(nodo*);
-    void siendoEvaluado(int impacto);
-    nodo *actual=nullptr;
+    QPropertyAnimation *animation;
+
+    int numNodo=0;
 
 public slots:
     void termino();
 
-private:
-    vector<nodo*> camino;
-    QPropertyAnimation *animation;
-
-    int numNodo=0;
 
 };
 

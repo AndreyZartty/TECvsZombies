@@ -8,6 +8,9 @@
 #include <nodo.h>
 #include <vector>
 #include <workerrevisar.h>
+class Juego;
+
+
 
 class estudiante;
 
@@ -28,13 +31,16 @@ public slots:
     void eliminarAdyacentes(nodo*);
     void on_Stats_clicked();
     void revisaNodos();
+    void on_aprobacionIndividual_clicked();
+    void on_aprobacionColectiva_clicked();
 private:
     Ui::Tablero *ui;
     nodo* matriz[10][10];
     QPropertyAnimation *animation;
     workerRevisar *revisa;
-    vector<estudiante*> listaEstudiantes;
+    vector<Estudiante*> listaEstudiantes;
 
+    Juego *game;
 
 };
 

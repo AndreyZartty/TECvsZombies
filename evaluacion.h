@@ -11,17 +11,17 @@ class Evaluacion : public QWidget
 
 public:
     Evaluacion();
-    void setOrigen(int x, int y);
-    void evaluar(int xfinal, int yfinal);
-    int corx;
-    int cory;
-    void setParent();
+    void setOrigen1(int x, int y);
+    void evaluar1(int xfinal, int yfinal);
+    int corx1;
+    int cory1;
+    void setParent1();
 
-    QLabel *imagen;
+    QLabel *imagen1;
 public slots:
-    void llegaEvaluacion();
+    void llegaEvaluacion1();
 signals:
-    void termino();
+    void termino1();
 private:
     QPropertyAnimation *animation;
 };

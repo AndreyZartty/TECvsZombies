@@ -25,6 +25,9 @@ public:
     int getAlcance();
     int getUpgrade();
 
+    Evaluacion *examen;
+
+
 private:
     int cantidadCreditos;
     int horasDedicadas;

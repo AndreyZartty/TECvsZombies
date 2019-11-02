@@ -402,7 +402,7 @@ Cuadricula* Estudiante::getCuadricula() {
 void Estudiante::setCuadricula(Cuadricula* _cuadricula) {
     cuadricula = _cuadricula;
 }
-void estudiante::termino(){
+void Estudiante::termino(){
     if (numNodo==camino.size()) {
         qDebug()<<"termino";
     }else if(numNodo==camino.size()-1){
@@ -413,7 +413,7 @@ void estudiante::termino(){
     numNodo=numNodo+1;
 }
 
-void estudiante::setNodoActual(nodo *act){
+void Estudiante::setNodoActual(nodo *act){
     actual = act;
     actual->agregarEstudiante(this);
     if (actual->tieneVigilante()){
@@ -421,7 +421,7 @@ void estudiante::setNodoActual(nodo *act){
     }
 }
 
-void estudiante::salioNodoActual(){
+void Estudiante::salioNodoActual(){
     if (actual!=nullptr){
         int nodoX=actual->x;
         int nodoY=actual->y;
@@ -431,10 +431,15 @@ void estudiante::salioNodoActual(){
         }
     }
 }
-void estudiante::siendoEvaluado(int impacto){
+void Estudiante::siendoEvaluado(int impacto){
     qDebug()<<impacto;
 }
-void estudiante::caminar(nodo* ini, nodo* fin){
+
+Estudiante::Estudiante()
+{
+
+}
+void Estudiante::caminar(nodo* ini, nodo* fin){
 
     h->setPixmap(QPixmap(":/est1.png"));
     h->setScaledContents(true);
@@ -456,8 +461,8 @@ void estudiante::caminar(nodo* ini, nodo* fin){
 
 }
 
-void estudiante::buscarCamino(nodo *matriz[10][10]){
-    nodo *inicio;
+void Estudiante::buscarCamino(){
+    /*nodo *inicio;
     nodo *actual;
     nodo *final;
     inicio= matriz[0][0];
@@ -491,11 +496,11 @@ void estudiante::buscarCamino(nodo *matriz[10][10]){
                 camino.push_back(actual);
             }
         }
-    }
-    caminar(nullptr,inicio);
+    }*/
+    caminar(nullptr,camino[0]);
 }
 
-void estudiante::setParent(Tablero *parent){
+void Estudiante::setParent(Tablero *parent){
     h = new QLabel(parent);
     animation = new QPropertyAnimation(h,"geometry");
     connect(animation,SIGNAL(finished()),this,SLOT(termino()));

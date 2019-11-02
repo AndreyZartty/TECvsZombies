@@ -8,7 +8,7 @@
 #include <modificarcurso1.h>
 #include <vector>
 
-class estudiante;
+class Estudiante;
 class Tablero;
 
 class nodo;
@@ -30,8 +30,8 @@ public:
     void eliminaCurso(Tablero*);
     void setVigilante(curso*);
     bool isFree();
-    void agregarEstudiante(estudiante *);
-    void eliminarEstudiante(estudiante *);
+    void agregarEstudiante(Estudiante *);
+    void eliminarEstudiante(Estudiante *);
     bool tieneVigilante();
     void solicitarEvaluacion(nodo*);
 
@@ -42,8 +42,9 @@ public:
     int y;
     int col;
     int fil;
+    int id;
     Tablero* par;
-    vector<estudiante*> listaEstudiantes;
+    vector<Estudiante*> listaEstudiantes;
 
 
 signals:

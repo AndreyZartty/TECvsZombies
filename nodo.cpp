@@ -10,8 +10,9 @@
 
 using namespace std;
 
-nodo::nodo(int col, int fil):x(120+col*80),y(50+fil*60),col(col),fil(fil)
+nodo::nodo(int col, int fil):x(250+col*80),y(50+fil*60),col(col),fil(fil)
 {
+    id= fil * 10 + col;
     Curso = nullptr;
     //boton es la torre
     boton = new QToolButton();
@@ -142,7 +143,7 @@ void nodo::setParent(Tablero *parent){
     boton->setParent(parent);
 }
 
-void nodo::agregarEstudiante(estudiante *e){
+void nodo::agregarEstudiante(Estudiante *e){
     listaEstudiantes.push_back(e);
 }
 //AL darle click al nodo
@@ -155,8 +156,9 @@ void nodo::onClick(){
         pantallaModificarCurso->show();
 
     }
-void nodo::eliminarEstudiante(estudiante *e){
-    std::vector<estudiante*>::iterator position = std::find(listaEstudiantes.begin(),listaEstudiantes.end(),e);
+}
+void nodo::eliminarEstudiante(Estudiante *e){
+    std::vector<Estudiante*>::iterator position = std::find(listaEstudiantes.begin(),listaEstudiantes.end(),e);
     if (position != listaEstudiantes.end()){
         listaEstudiantes.erase(position);
     }
@@ -172,19 +174,8 @@ bool nodo::tieneVigilante(){
 }
 
 void nodo::solicitarEvaluacion(nodo*target){
-    /*
-    connect(vigilante->examen,SIGNAL(termino()),this,SLOT(atacar()));
-    vigilante->examen->evaluar(target->x,target->y);*/
-    vigilante->examen->imagen->setParent(par);
-    vigilante->examen->evaluar(100,100);
-    qDebug()<<vigilante;
 }
 
-void nodo::onClick(){
-    p->show();
-    qDebug()<<"Toca el botón"<<boton;
-    qDebug()<<"En el nodo"<<this;
-}
 
 //AGREGAR EL CURSO AL NODO
 bool nodo::isFree(){
@@ -196,9 +187,6 @@ void nodo::modificarNodo(){
     //Este es el curso seleccionada
     Curso = pantallaAgregarCurso->Curso;
     boton->setIconSize(QSize(42,42));
-    Curso = p->Curso;
-    Curso->examen->setParent();
-    Curso->examen->setOrigen(x,y);
     boton->setIconSize(QSize(50,50));
     boton->setIcon(Curso->imagen);
 

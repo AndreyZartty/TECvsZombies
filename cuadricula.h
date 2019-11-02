@@ -1,10 +1,11 @@
-#ifndef CUADRICULA_H
+﻿#ifndef CUADRICULA_H
 #define CUADRICULA_H
 
 #include "node.h"
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include "torre.h"
 
 ///Se define el tamaño de la cuadricula
 #define ZONE_SIZE 10
@@ -58,6 +59,8 @@ public:
     vector<int> getTowerIdList();
     vector<int> getPosibleTowerIdList();
     vector<int> getVerfifiedNotTowersIdList();
+
+    void setTowers(vector<int> tt);
 
 };
 #endif // CUADRICULA_H

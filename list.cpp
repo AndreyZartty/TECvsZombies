@@ -84,9 +84,9 @@ void List::insertLast(Estudiante* estudiante) {
 
 void List::swap(Estudiante *xp, Estudiante *yp)
 {
-    Estudiante temp = *xp;
-    *xp = *yp;
-    *yp = temp;
+    Estudiante *temp = xp;
+    xp = yp;
+    yp = temp;
 }
 
 void List::bubbleSort()

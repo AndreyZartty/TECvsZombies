@@ -5,27 +5,24 @@ Evaluacion::Evaluacion()
 
 }
 
-void Evaluacion::evaluar(int x, int y){
-    imagen->setText("???");
-    imagen->setScaledContents(true);
+void Evaluacion::evaluar1(int x, int y){
+    imagen1->setText("???");
+    imagen1->setScaledContents(true);
 
     animation->setDuration(1000);
     animation->setEndValue(QRect(x,y,50,50));
     animation->start();
 
 }
-void Evaluacion::setOrigen(int x, int y){
-    corx = x;
-    cory = y;
+void Evaluacion::setOrigen1(int x, int y){
+    corx1 = x;
+    cory1 = y;
 }
 
-void Evaluacion::llegaEvaluacion(){
+void Evaluacion::llegaEvaluacion1(){
     qDebug()<<"Llega";
 }
 
-void Evaluacion::setParent(){
-    imagen = new QLabel();
-    animation = new QPropertyAnimation(imagen,"geometry");
-    animation->setStartValue(QRect(corx,cory,50,50));
-    connect(animation,SIGNAL(finished()),this,SLOT(llegaEvaluacion()));
+void Evaluacion::setParent1(){
+
 }
