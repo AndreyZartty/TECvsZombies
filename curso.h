@@ -2,14 +2,12 @@
 #define CURSO_H
 #include <QPixmap>
 #include <string>
-#include <evaluacion.h>
-
 
 using namespace std;
 
-class curso : public QWidget
+
+class curso
 {
-    Q_OBJECT
 public:
     string nombre;
     QPixmap imagen;

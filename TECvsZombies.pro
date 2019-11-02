@@ -37,12 +37,8 @@ SOURCES += \
     stats.cpp \
     tablero.cpp \
     torre.cpp
-    evaluacion.cpp \
-    workerrevisar.cpp
 
 HEADERS += \
-    evaluacion.h \
-    workerrevisar.h
     astar.h \
     backtracking.h \
     cuadricula.h \
