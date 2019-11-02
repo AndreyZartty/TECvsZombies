@@ -25,12 +25,10 @@ modificarCurso1::~modificarCurso1()
 
 void modificarCurso1::on_upgrade_clicked()
 {
-    qDebug()<<"upgrade";
     emit actualizarCurso();
 }
 
 void modificarCurso1::on_delete_2_clicked()
 {
-    qDebug()<<"delete";
     emit eliminarCurso();
 }

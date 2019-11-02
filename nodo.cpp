@@ -86,7 +86,6 @@ void nodo::actualizar(){
             boton->setIconSize(QSize(42,42));
             boton->setIcon(Curso->imagen);
             pantallaModificarCurso->hide();
-            cout << "Upgrade 2" << endl;
 
         }
         //SEGUNDO UPGRADE NIVEL MÁXIMO
@@ -103,7 +102,6 @@ void nodo::actualizar(){
 
             //ELIMINA LA PANTALLA DE MODIFICAR EL CURSO
             pantallaModificarCurso->hide();
-            cout << "Upgrade 3" << endl;
 
         }
     }
