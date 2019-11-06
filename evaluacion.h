@@ -5,6 +5,10 @@
 #include <QLabel>
 #include <QDebug>
 
+class Tablero;
+class nodo;
+
+class Evaluacion;
 class Evaluacion : public QWidget
 {
     Q_OBJECT
@@ -12,12 +16,13 @@ class Evaluacion : public QWidget
 public:
     Evaluacion();
     void setOrigen(int x, int y);
-    void evaluar(int xfinal, int yfinal);
+    void evaluar(nodo*);
     int corx;
     int cory;
-    void setParent();
+    void setParent(Tablero *parent);
 
     QLabel *imagen;
+    nodo* actual;
 public slots:
     void llegaEvaluacion();
 signals:

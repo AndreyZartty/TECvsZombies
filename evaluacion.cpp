@@ -1,18 +1,23 @@
 #include "evaluacion.h"
+#include <tablero.h>
+#include <nodo.h>
 
 Evaluacion::Evaluacion()
 {
 
 }
 
-void Evaluacion::evaluar(int x, int y){
-    imagen->setText("???");
+void Evaluacion::evaluar(nodo*g){
+    actual = g;
+    imagen->setPixmap(QPixmap(":/car.png"));
     imagen->setScaledContents(true);
 
     animation->setDuration(1000);
-    animation->setEndValue(QRect(x,y,50,50));
-    animation->start();
 
+    connect(this,SIGNAL(termino()),g,SLOT(atacar()));
+    animation->setStartValue(QRect(corx,cory,50,50));
+    animation->setEndValue(QRect(g->x,g->y,50,50));
+    animation->start();
 }
 void Evaluacion::setOrigen(int x, int y){
     corx = x;
@@ -21,11 +26,11 @@ void Evaluacion::setOrigen(int x, int y){
 
 void Evaluacion::llegaEvaluacion(){
     qDebug()<<"Llega";
+    emit termino();
 }
 
-void Evaluacion::setParent(){
-    imagen = new QLabel();
+void Evaluacion::setParent(Tablero * h){
+    imagen = new QLabel(h);
     animation = new QPropertyAnimation(imagen,"geometry");
-    animation->setStartValue(QRect(corx,cory,50,50));
     connect(animation,SIGNAL(finished()),this,SLOT(llegaEvaluacion()));
 }

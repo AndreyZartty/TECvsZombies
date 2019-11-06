@@ -2,6 +2,7 @@
 #include "ui_tablero.h"
 #include <nodo.h>
 #include <estudiante.h>
+#include <evaluacion.h>
 
 
 Tablero::Tablero(QWidget *parent) :
@@ -14,6 +15,7 @@ Tablero::Tablero(QWidget *parent) :
     connect(revisa,SIGNAL(progreso()),this,SLOT(revisaNodos()));
     revisa->start();
     crearMatriz();
+    crearEvaluaciones();
 }
 
 Tablero::~Tablero()
@@ -42,6 +44,7 @@ void Tablero::revisaNodos(){
 }
 
 void Tablero::generarAdyacentes(nodo* seleccionado){
+
     int alcance = seleccionado->Curso->alcance;
 
     for(int y = -alcance; y<alcance+1;y++){
@@ -57,6 +60,33 @@ void Tablero::generarAdyacentes(nodo* seleccionado){
     }
 }
 
+void Tablero::varas(){
+    Evaluacion *p= new Evaluacion();
+    p->setParent(this);
+    p->setOrigen(matriz[1][1]->x,matriz[1][1]->y);
+    p->evaluar(matriz[2][2]);
+}
+
+void Tablero::crearEva(nodo* fin){
+    for (int e1=0;e1<listaEvaluaciones.size();e1++){
+
+        if (listaEvaluaciones[e1]->corx==fin->vigilante->x && listaEvaluaciones[e1]->cory==fin->vigilante->y){
+            listaEvaluaciones[e1]->evaluar(fin);
+        }
+    }
+}
+
+void Tablero::crearEvaluaciones(){
+    Evaluacion *p;
+    for (int i=0;i<10;i++){
+        for (int j=0;j<10;j++){
+            p= new Evaluacion();
+            p->setParent(this);
+            p->setOrigen(matriz[i][j]->x,matriz[i][j]->y);
+            listaEvaluaciones.push_back(p);
+        }
+    }
+}
 
 
 void Tablero::crearMatriz(){
@@ -72,4 +102,5 @@ void Tablero::crearMatriz(){
     e->setParent(this);
     e->buscarCamino(matriz);
     listaEstudiantes.push_back(e);
+
 }

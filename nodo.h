@@ -6,6 +6,7 @@
 #include <curso.h>
 #include <crearcurso.h>
 #include <vector>
+#include <evaluacion.h>
 
 class estudiante;
 class Tablero;
@@ -28,10 +29,13 @@ public:
     void agregarEstudiante(estudiante *);
     void eliminarEstudiante(estudiante *);
     bool tieneVigilante();
-    void solicitarEvaluacion(nodo*);
+    void solicitarEvaluacion();
+
+    curso* vigilante=nullptr;
 
     QToolButton * boton;
     curso *Curso= nullptr;
+    Evaluacion *ev;
     nodo* matriz[10][10];
     int x;
     int y;
@@ -43,10 +47,10 @@ public:
 
 signals:
     void cursoCreado(nodo*);
+    void crearEvaluacion(nodo*);
 
 private:
 
-    curso* vigilante=nullptr;
     crearCurso *p;
 };
 

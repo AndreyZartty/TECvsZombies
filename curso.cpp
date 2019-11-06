@@ -4,5 +4,4 @@
 
 curso::curso()
 {
-    examen = new Evaluacion();
 }

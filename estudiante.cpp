@@ -19,7 +19,7 @@ void estudiante::setNodoActual(nodo *act){
     actual = act;
     actual->agregarEstudiante(this);
     if (actual->tieneVigilante()){
-        actual->solicitarEvaluacion(actual);
+        actual->solicitarEvaluacion();
     }
 }
 

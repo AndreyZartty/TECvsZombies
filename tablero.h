@@ -8,6 +8,8 @@
 #include <nodo.h>
 #include <vector>
 #include <workerrevisar.h>
+#include <evaluacion.h>
+
 
 class estudiante;
 
@@ -22,16 +24,23 @@ class Tablero : public QMainWindow
 public:
     explicit Tablero(QWidget *parent = nullptr);
     void crearMatriz();
+    void crearEvaluaciones();
+    void varas();
     ~Tablero();
 public slots:
     void generarAdyacentes(nodo*);
     void revisaNodos();
+    void crearEva(nodo*);
+
+
 private:
     Ui::Tablero *ui;
     nodo* matriz[10][10];
     QPropertyAnimation *animation;
     workerRevisar *revisa;
     vector<estudiante*> listaEstudiantes;
+    vector<Evaluacion*> listaEvaluaciones;
+    Evaluacion *p;
 
 };
 

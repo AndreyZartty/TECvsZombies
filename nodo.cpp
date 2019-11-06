@@ -17,6 +17,7 @@ nodo::nodo(int col, int fil):x(120+col*80),y(50+fil*60),col(col),fil(fil)
 void nodo::setParent(Tablero *parent){
     par = parent;
     connect(this,SIGNAL(cursoCreado(nodo*)),parent,SLOT(generarAdyacentes(nodo*)));
+    connect(this,SIGNAL(crearEvaluacion(nodo*)),parent,SLOT(crearEva(nodo*)));
     boton->setParent(parent);
 }
 
@@ -40,13 +41,8 @@ bool nodo::tieneVigilante(){
     return vigilante!=nullptr;
 }
 
-void nodo::solicitarEvaluacion(nodo*target){
-    /*
-    connect(vigilante->examen,SIGNAL(termino()),this,SLOT(atacar()));
-    vigilante->examen->evaluar(target->x,target->y);*/
-    vigilante->examen->imagen->setParent(par);
-    vigilante->examen->evaluar(100,100);
-    qDebug()<<vigilante;
+void nodo::solicitarEvaluacion(){
+    emit crearEvaluacion(this);
 }
 
 void nodo::onClick(){
@@ -62,8 +58,8 @@ bool nodo::isFree(){
 
 void nodo::modificarNodo(){
     Curso = p->Curso;
-    Curso->examen->setParent();
-    Curso->examen->setOrigen(x,y);
+    Curso->x=x;
+    Curso->y=y;
     boton->setIconSize(QSize(50,50));
     boton->setIcon(Curso->imagen);
     emit cursoCreado(this);
